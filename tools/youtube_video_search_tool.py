@@ -28,7 +28,7 @@ class YoutubeVideoSearchTool(BaseTool):
     description: str = "Searches YouTube videos based on a keyword and returns a list of video search results."
     args_schema: Type[BaseModel] = YoutubeVideoSearchToolInput
 
-    def _run(self, keyword: str, max_results: int = 10) -> List[VideoSearchResult]:
+    def _run(self, keyword: str, max_results: int = 15) -> List[VideoSearchResult]:
         api_key = os.getenv("YOUTUBE_API_KEY")
         url = "https://www.googleapis.com/youtube/v3/search"
         params = {
