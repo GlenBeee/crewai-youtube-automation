@@ -34,16 +34,12 @@ That should allow you to enable the YOUTUBE API
 
 # Issues
 
-1. Unresolved issue to work out:
+See [ISSUES.md](./ISSUES.md) for the output, it works through so far then gives an error:
 
-> Entering new CrewAgentExecutor chain...
-Use Tool: Search YouTube Videos
-Keyword: "Automating Tasks Using CrewAI" 
+```
+Index out of range
+```
 
-Failed to convert text into a pydantic model due to the following error: Invalid json output: {
-    "tool_name": "Search YouTube Videos",
-    "arguments": {
-        "keyword": "Automating Tasks Using CrewAI",
-        "max_results": int (default: 10) // or any reasonable maximum result limit
-    }
-}
+Perhaps ./tools/youtube_video_search_tool.py is not receiving sufficient data back from the YouTube API
+
+It is difficult to know how we debug this with CrewAI - open to suggestions!

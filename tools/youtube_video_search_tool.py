@@ -34,11 +34,10 @@ class YoutubeVideoSearchTool(BaseTool):
         params = {
             "part": "snippet",
             "q": keyword,
-            "maxResults": 10,
+            "maxResults": max_results,
             "type": "video",
             "key": api_key
         }
-        print("YT KEY: ", api_key)
         response = requests.get(url, params=params)
         response.raise_for_status()
         items = response.json().get("items", [])
