@@ -37,7 +37,7 @@ That should allow you to enable the YOUTUBE API
 See [ISSUES.md](./ISSUES.md) for the output, it works through so far then gives an error:
 
 ```
-Index out of range
+Failed to convert text into a pydantic model due to the following error: Invalid json output:
 ```
 
 Perhaps ./tools/youtube_video_search_tool.py is not receiving sufficient data back from the YouTube API
