@@ -2,7 +2,7 @@ from crewai import Crew, Process
 
 from agents import YoutubeAutomationAgents
 from tasks import YoutubeAutomationTasks
-#from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from tools.youtube_video_details_tool import YoutubeVideoDetailsTool
 from tools.youtube_video_search_tool import YoutubeVideoSearchTool
 
@@ -10,14 +10,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize the OpenAI GPT-4 language model
-#OpenAIGPT4 = ChatOpenAI(
-#    model="crewai-llama2",
-#    base_url="http://localhost:11434/v1"
-#)
+ollama = ChatOpenAI(
+    model="mistral", # ollama
+    openai_api_base="http://localhost:11434/v1", # ollama
+    #openai_api_base="http://localhost:1234/v1", # LM Studio
+    api_key="NotUsed"
+)
 
-#from langchain.llms import Ollama
-from langchain_community.llms import Ollama
-ollama_openhermes = Ollama(model="openhermes")
+#from langchain_community.llms import Ollama
+#ollama = Ollama(model="openhermes")
 
 agents = YoutubeAutomationAgents()
 tasks = YoutubeAutomationTasks()
@@ -83,8 +84,8 @@ crew = Crew(
            create_email_announcement_for_new_video],
     process=Process.hierarchical,
     #manager_llm=OpenAIGPT4
-    manager_llm=ollama_openhermes,
-    llm=ollama_openhermes
+    manager_llm=ollama,
+    llm=ollama
 )
 
 # Kick of the crew

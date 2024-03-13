@@ -20,7 +20,7 @@ class YoutubeVideoSearchToolInput(BaseModel):
     """Input for YoutubeVideoSearchTool."""
     keyword: str = Field(..., description="The search keyword.")
     max_results: int = Field(
-        10, description="The maximum number of results to return.")
+        15, description="The maximum number of results to return.")
 
 
 class YoutubeVideoSearchTool(BaseTool):

@@ -5,8 +5,15 @@ from langchain.agents import load_tools
 human_tools = load_tools(["human"])
 
 #from langchain.llms import Ollama
-from langchain_community.llms import Ollama
-ollama_openhermes = Ollama(model="openhermes")
+#from langchain_community.llms import Ollama
+#ollama = Ollama(model="openhermes")
+from langchain_openai import ChatOpenAI
+ollama = ChatOpenAI(
+    model="mistral", # ollama
+    openai_api_base="http://localhost:11434/v1", # ollama
+    #openai_api_base="http://localhost:1234/v1", # LM Studio
+    api_key="NotUsed"
+)
 
 class YoutubeAutomationAgents():
     def youtube_manager(self):
@@ -26,7 +33,7 @@ class YoutubeAutomationAgents():
                 """,
             allow_delegation=True,
             verbose=True,
-            llm=ollama_openhermes
+            llm=ollama
         )
 
     def research_manager(self, youtube_video_search_tool, youtube_video_details_tool):
@@ -41,7 +48,7 @@ class YoutubeAutomationAgents():
             verbose=True,
             allow_delegation=True,
             tools=[youtube_video_search_tool, youtube_video_details_tool],
-            llm=ollama_openhermes
+            llm=ollama
         )
 
     def title_creator(self):
@@ -53,7 +60,7 @@ class YoutubeAutomationAgents():
             backstory="""As a Title Creator, you are responsible for creating 10 potential titles for a given 
                 YouTube video topic and description.""",
             verbose=True,
-            llm=ollama_openhermes
+            llm=ollama
         )
 
     def description_creator(self):
@@ -63,7 +70,7 @@ class YoutubeAutomationAgents():
             backstory="""As a Description Creator, you are responsible for creating a description for a given 
                 YouTube video topic and description.""",
             verbose=True,
-            llm=ollama_openhermes
+            llm=ollama
         )
 
     def email_creator(self):
@@ -73,6 +80,6 @@ class YoutubeAutomationAgents():
             backstory="""As an Email Creator, you are responsible for creating an email to send to the marketing team 
                 to promote the new YouTube video.""",
             verbose=True,
-            llm=ollama_openhermes,
+            llm=ollama,
             tools=human_tools
         )
